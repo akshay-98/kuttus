@@ -52,7 +52,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationListener=new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Log.i("LOCATION",location.toString());
+
+
+                LatLng userLocation = new LatLng(location.getAltitude(),location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
 
             }
 
@@ -96,10 +100,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
     }
 }
